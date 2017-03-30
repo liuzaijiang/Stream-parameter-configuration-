@@ -1,0 +1,1077 @@
+﻿<!DOCTYPE html>
+ <html>
+ <head>
+ <meta charset="utf-8">
+ <title></title>
+ <style>
+ body{
+	background-color:#f9f6f6;
+ }
+ 
+.streamTypeShow{
+	margin-top:30px;
+	height: 180px;
+	width: 600px;
+}
+
+.videoSetShow{
+	height: 200px;
+	width: 190px;
+	float: left;
+	padding-left:10px;
+}
+
+.videoSetList{
+	width: 290px;
+	height: 22px;
+	margin-bottom: 2px;
+}
+.videoSetList label{
+	width: 70px;
+	float: left;
+	text-align: left;
+	font-size: 14px;
+	margin:5px;
+	font-family:Tahoma, Geneva, sans-serif;
+}
+.videoSetList select{
+	width: 150px;
+	height: 21px;
+	vertical-align:middle;
+	padding:0;
+	margin:5px;
+	float: left;
+}
+.ButtonRight{
+	font-size: 14px;
+	padding: 0;
+	border:1px solid #e4e4e4;	
+	height: 30px;
+	width: 81px;
+	margin-left: 7px;
+	float: left;
+}
+
+.topMenu{
+	width: 99%;
+	height: 28px;
+	border-bottom: #BBB 1px solid;
+	margin-bottom: 1px;
+	margin-left: 1px;
+}
+
+.topMenu ul{
+	height: 28px;
+	margin: 0px;
+	margin-bottom: 0px;
+	padding: 0;
+}
+
+.streamChoose{
+	width: 103px;
+	height: 28px;
+	overflow:hidden;
+	margin: 0px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 28px;
+	list-style: none;
+	float: left;
+	font-weight: bold;
+	font-size: 14px;
+	border-right:1px #F9F6F6 solid;
+	border-bottom:1px #F9F6F6 solid;
+	border-top:1px #F9F6F6 solid;
+	padding: 0;
+}
+
+.streamChoose div{
+	margin-left:5px;
+	margin-right:5px;
+	margin-bottom:-2px;
+}
+
+.states-close{
+	display:inline-block;
+	width:15px;
+	height:15px;
+	border-radius:15px;
+	background-color:red;
+}
+
+.states-open{
+	display:inline-block;
+	width:15px;
+	height:15px;
+	border-radius:15px;
+	background-color:green;
+}
+
+ </style>
+ </head>
+ <body>
+	<div style="display:none">
+		<input id="Streamtype_0" value="0"/>
+		<input id="Streamtype_1" value="1"/>
+		<input id="Streamtype_2" value="2"/>
+		<input id="Streamtype_3" value="3"/>
+		
+		<input id="Current_Codingtype_0" value="0"/><!--主码流，从码流，第三，第四码流下当前的编码类型 0=264 1=265 2=Mjpeg -->
+		<input id="Current_Codingtype_1" value="1"/>
+		<input id="Current_Codingtype_2" value="2"/>
+		<input id="Current_Codingtype_3" value="1"/>
+		
+		
+		<input id="Switch_0" value="0"/>
+		<input id="Switch_1" value="1"/>
+		<input id="Switch_2" value="0"/>
+		<input id="Switch_3" value="1"/>
+		
+		
+		<input id="Coding_Quality_0" value="1"/>
+		<input id="Coding_Quality_1" value="2"/>
+		<input id="Coding_Quality_2" value="1"/>
+		<input id="Coding_Quality_3" value="0"/>
+
+		
+		<input id="Resolution_0" value="5"/>
+		<input id="Resolution_1" value="5"/>
+		<input id="Resolution_2" value="5"/>
+		<input id="Resolution_3" value="4"/>
+
+		
+		<input id="IPrate_0" value="0"/>
+		<input id="IPrate_1" value="4"/>
+		<input id="IPrate_2" value="2"/>
+		<input id="IPrate_3" value="1"/>
+
+		
+		<input id="FrameRate_0" value="13"/>
+		<input id="FrameRate_1" value="20"/>
+		<input id="FrameRate_2" value="15"/>
+		<input id="FrameRate_3" value="15"/>
+
+		
+		<input id="BitRateControl_0" value="0"/>
+		<input id="BitRateControl_1" value="1"/>
+		<input id="BitRateControl_2" value="0"/>
+		<input id="BitRateControl_3" value="1"/>
+
+		
+		<input id="BitRateTop_0" value="256"/>
+		<input id="BitRateTop_1" value="264"/>
+		<input id="BitRateTop_2" value="4000"/>
+		<input id="BitRateTop_3" value="2000"/>
+
+		
+		<input id="MJPEGQuality_" value="2"/>
+		
+	</div>
+	<div class="topMenu" style="min-width:300px; margin-left:300px;width:450px;">
+        <ul style="width:800px;">
+            <li class="streamChoose" ><div class="states-close" id="switch0" ></div>主码流</li>
+            <li class="streamChoose" ><div class="states-close" id="switch1" ></div>从码流</li>
+			<li class="streamChoose" ><div class="states-close" id="switch2" ></div>第三路码流</li>
+			<li class="streamChoose" ><div class="states-close" id="switch3" ></div>第四路码流</li>
+        </ul>
+    </div>
+	<div class="streamTypeShow" style="margin-left:300px">
+        <div class="videoSetShow">
+			 <div class="videoSetList">
+                  <label>码流类型: </label>
+                   <select  name="Streamtype" id="Streamtype">
+						  <option value="0">主码流</option>
+                          <option value="1">从码流</option>
+						  <option value="2">第三路码流</option>
+						  <option value="3">第四路码流</option>
+                     </select> 
+             </div>
+			 
+			 <div class="videoSetList">
+                  <label>启动: </label>
+                   <select  name="Switch" id="Switch">
+						  <option value="1">开启</option>
+                          <option value="0">关闭</option>
+                    </select> 
+             </div>
+			 
+			 <div class="videoSetList">
+                  <label>编码类型: </label>
+                  <select  name="Codingtype" id="CodingType">
+						  <option value="0">H.264</option>
+                          <option value="1">H.265</option>				  
+                   </select> 
+             </div>
+			 
+			 <div class="videoSetList">
+                  <label>编码质量: </label>
+                  <select  name="Codingquality" id="CodingQuality">
+						  <option value="0">High-line</option>
+                          <option value="1">Main-line</option>
+						  <option value="2">Base-line</option>						  
+                  </select> 
+             </div>
+			 
+             <div class="videoSetList">
+                  <label>分辨率: </label>
+                   <select  name="Resolution" id="Resolution">
+                   </select> 
+             </div>
+             <div class="videoSetList">
+                   <label>帧 率: </label>
+                   <select name="FrameRate" id="FrameRate">
+                    </select>
+             </div> 
+             <div class="videoSetList">
+                    <label>I/P率: </label>
+					<select name="IPrate" id="IPrate">
+                            <option value="4">25</option>
+                            <option value="3">20</option>
+                            <option value="2">15</option>
+                            <option value="1">10</option>
+                            <option value="0">5</option>
+                     </select>
+             </div>
+            <div class="videoSetList">
+                    <label>码率控制: </label>
+					<select name="BitRateControl" id="BitRateControl">
+                         <option value="0">可变码率</option>
+                         <option value="1">固定码率</option>
+                    </select>
+            </div>
+                 
+            <div class="videoSetList">
+                    <label id="RateName">码率: </label>
+                    <input type="text" id="BitRateTop" style="width:60px;float:left;margin:5px;" maxlength="4"/>
+                    <label style="display:inline; width:30px; font-size:12px">Kbps</label>
+					<label style="font-size:12px; width:20px;">(256~2000)</label>
+            </div>
+
+            <div class="videoSetList" style="display:none;">
+				  <label>图像质量: </label>
+                  <select  name="Quality" id="MJPEGQuality">
+						  <option value="0">最好</option>
+                          <option value="1">好</option>		
+						  <option value="2">一般</option>
+						  <option value="3">差</option>
+						  <option value="4">最差</option>
+                   </select>
+			</div>
+			
+            <div class="videoSetList"></div>
+            <br/>
+            <div class="submitButton">
+                <input type="button" class="ButtonRight" value="保存" onclick="videoSet()" />
+            </div>
+        </div>
+    </div>
+ <script src="jquery.js"></script>
+ <script>
+	var params=new Array();//保存数据的数组
+	var LANGUAGE=1;//页面为中文
+	var supMaxResolution=6;//设备支持最大分辨率
+	var frequency=60//当前的防闪频率HZ
+
+	/*码流切换函数*/
+	function StreamtypeChange(){
+		var Streamtype=$("#Streamtype").val();//Streamtype=0是主码流,1是从码流,2是第三路码流,3是第四路码流；
+		if(Streamtype=="2")
+		{
+			$("<option value='2'>MJPEG</option>").appendTo($("#CodingType"));
+			$("#MJPEGQuality").val($("#MJPEGQuality_").val());
+		}
+		else{
+			$("#CodingType option").eq(2).remove();
+		}
+		$("#CodingType").val(params[Streamtype].CodingType);
+
+		var currentType=currentCodetype();
+		if(currentType!="8")
+		{
+			IsMjpeg(false);
+		}
+		else{
+			IsMjpeg(true);
+		}
+		
+		codingQualityShow();
+		$("#Switch").val(params[Streamtype].Switch);
+		$("#CodingQuality").val(params[Streamtype].CodingQuality);
+		$("#Resolution").val(params[Streamtype].Resolution);
+		$("#IPrate").val(params[Streamtype].IPrate);
+		$("#FrameRate").val(params[Streamtype].FrameRate);
+		$("#BitRateControl").val(params[Streamtype].BitRateControl);
+		$("#BitRateTop").val(parseInt(params[Streamtype].BitRateTop)/1000);
+		
+
+		resolutionInit();
+		frameInit();
+		selectRateName();
+		Raterange(Streamtype);
+	}
+	
+	/*只有264的情况下有编码质量*/
+	function codingQualityShow(){ 
+		if($("#CodingType").val()!="0")
+		{
+			$(".streamTypeShow .videoSetList").eq(3).hide();
+		}
+		else{
+			$(".streamTypeShow .videoSetList").eq(3).show();
+		}
+	}
+	
+	/*固定码流和可变码流显示改变*/
+	function selectRateName(){
+		var val = $("#BitRateControl").val();
+		var RATENAME = [{c0: "Bit rate upper limit:",c1: "Bit rate:"},{c0: "码率上限:",c1: "码率:"}];
+		$("#RateName").text(RATENAME[LANGUAGE]['c'+val]);
+	}
+	/*分辨率关联帧率函数*/
+	function resolution_rel_framerate(){
+		var streamType=$("#Streamtype").val();
+		var currentType=currentCodetype();
+		var resolution_current=$("#Resolution").val();
+		var resolution_major=params[0].Resolution;
+		var thirdresolution=params[2].Resolution;
+		var frtObj = $("#FrameRate");
+		var frtVal =  parseInt(frtObj.val());
+		var resolution=streamType==0?resolution_current:resolution_major;
+		var mjpegresolution=streamType==2?resolution_current:thirdresolution;
+		var frameRateError=false;
+		var limitframeRate=frequency==50?25:30
+		var tmp=params[2].FrameRate;
+		
+		if(mjpegresolution=="16")
+		{
+			mjpegresolution=3;
+		}
+
+		if(streamType==0||currentType==8)
+		{
+			if(currentType==8)
+			{
+				params[2].FrameRate=frtVal;
+			}
+			if(resolution>10||mjpegresolution>10)
+			{
+				for(var i=0;i<4;i++)
+				{
+					if(params[i].FrameRate>limitframeRate)
+					{
+						frameRateError=true;
+						break;
+					}
+				}
+			}
+		params[2].FrameRate=tmp;
+		}
+		 if(frequency==50)
+		  {
+			if(supMaxResolution==5||supMaxResolution==6||supMaxResolution==8)
+			{
+			if(resolution<=10&&mjpegresolution<=10&&!frameRateError)
+			{
+				if(currentType==8)
+				{
+					if(frtObj.length==25)
+					{
+						return;
+					}
+					else{
+						for(i=25;i>0;i--){
+							var tempStr;
+							tempStr += "<option value='" + i + "'>" + i + "</option>";
+							}
+						frtObj.html(tempStr);
+						frtVal= frtVal>25?25:frtVal;
+						setTimeout(function(){frtObj.val(frtVal);},0);
+						}	
+				}
+				else{
+					if(frtObj.length==50)
+					{
+						return;
+					}
+					else{
+						for(i=50;i>0;i--){
+							var tempStr;
+							tempStr += "<option value='" + i + "'>" + i + "</option>";
+							}
+						frtObj.html(tempStr);
+						setTimeout(function(){frtObj.val(frtVal);},0);
+					}
+				}
+			}
+			else{
+				if(frameRateError)
+				{
+					alert(["When the main stream or the third stream is greater than 1080P \n all stream frame rate is not greater than 25 frames to please ","当主码流或第三码流大于1080P时\n所有码流帧率请调到不大于25帧"][LANGUAGE]);
+					$("#Resolution").val(params[streamType].Resolution);
+					return;
+				}
+				else{
+					if(frtObj.length==25)
+					{
+						return;
+					}
+					else{
+						for(i=25;i>0;i--){
+							var tempStr;
+							tempStr += "<option value='" + i + "'>" + i + "</option>";
+							}
+						frtObj.html(tempStr);
+						frtVal= frtVal>25?25:frtVal;
+						setTimeout(function(){frtObj.val(frtVal);},0);
+						}	
+					}
+			}
+			}
+		  }
+		else{
+			if(supMaxResolution==5||supMaxResolution==6||supMaxResolution==8)
+			{
+			if(resolution<=10&&mjpegresolution<=10&&!frameRateError)
+			{
+				if(currentType==8)
+				{
+					if(frtObj.length==30)
+					{
+						return;
+					}
+					else{
+						for(i=30;i>0;i--){
+							var tempStr;
+							tempStr += "<option value='" + i + "'>" + i + "</option>";
+							}
+						frtObj.html(tempStr);
+						frtVal= frtVal>30?30:frtVal;
+						setTimeout(function(){frtObj.val(frtVal);},0);
+						}	
+				}
+				else{
+					if(frtObj.length==60)
+					{	
+						return;
+					}
+					else{
+						for(i=60;i>0;i--){
+							var tempStr;
+							tempStr += "<option value='" + i + "'>" + i + "</option>";
+							}
+						frtObj.html(tempStr);
+						setTimeout(function(){frtObj.val(frtVal);},0);
+					}
+				}
+			}
+			else{
+				if(frameRateError)
+				{
+					alert(["When the main stream or the third stream is greater than 1080P \n all stream frame rate is not greater than 30 frames to please","当主码流或第三码流大于1080P时\n所有码流帧率请调到不大于30帧"][LANGUAGE]);
+					$("#Resolution").val(params[streamType].Resolution);
+					//error=true;
+					return;
+				}else{
+				if(frtObj.legth==30)
+				{
+					return;
+				}
+				else{
+					for(i=30;i>0;i--){
+						var tempStr;
+						tempStr += "<option value='" + i + "'>" + i + "</option>";
+						}
+					frtObj.html(tempStr);
+					frtVal= frtVal>30?30:frtVal;
+					setTimeout(function(){frtObj.val(frtVal);},0);
+				}
+				}
+			}
+			}
+		  }
+	
+	}
+	
+	/*第三码流切换MJPEG时选择显示或隐藏相关选项*/
+	function IsMjpeg(falg){
+		if(falg)
+		{
+			$(".streamTypeShow .videoSetList").eq(6).hide();
+			$(".streamTypeShow .videoSetList").eq(7).hide();
+			$(".streamTypeShow .videoSetList").eq(8).hide();
+			$(".streamTypeShow .videoSetList").eq(9).show();
+			
+			$("#MJPEGQuality").val($("#MJPEGQuality_").val());
+		}
+		else{
+			$(".streamTypeShow .videoSetList").eq(6).show();
+			$(".streamTypeShow .videoSetList").eq(7).show();
+			$(".streamTypeShow .videoSetList").eq(8).show();
+			$(".streamTypeShow .videoSetList").eq(9).hide();
+		}
+	}
+	
+	/*编码类型改变函数*/
+	function CodingtypeChange(){
+		var Streamtype=$("#Streamtype").val();
+		var currentType;
+		var resolution_current=$("#Resolution").val();
+		var resolution_major=params[0].Resolution;
+		var frtObj = $("#FrameRate");
+		var frtVal =  parseInt(frtObj.val());
+		currentType=currentCodetype();
+		codingQualityShow();
+		if(Streamtype=="2")
+		{
+			if(currentType==8)
+			{
+				IsMjpeg(true);
+				if(supMaxResolution!=8)
+				{
+					if(frequency==50)
+					{
+						if(frtObj.length==25)
+						{
+							return;
+						}
+						else{
+							for(i=25;i>0;i--){
+								var tempStr;
+								tempStr += "<option value='" + i + "'>" + i + "</option>";
+								}
+							frtObj.html(tempStr);
+							setTimeout(function(){frtObj.val(frtVal);},0);
+						}
+					}
+					else{
+						if(frtObj.length==30)
+						{
+							return;
+						}
+						else{
+							for(i=30;i>0;i--){
+								var tempStr;
+								tempStr += "<option value='" + i + "'>" + i + "</option>";
+								}
+							frtObj.html(tempStr);
+							setTimeout(function(){frtObj.val(frtVal);},0);
+						}
+						
+					}
+				}
+			}
+			else{
+				IsMjpeg(false);
+				if(supMaxResolution!=8){
+					resolution_current=resolution_current>10?5:resolution_current;
+					if(resolution_current<=10&&resolution_major<=10)
+					{
+						if(frequency==50)
+						{
+							if(frtObj.length==50)
+							{
+								return;
+							}
+							else{
+								for(i=50;i>0;i--){
+									var tempStr;
+									tempStr += "<option value='" + i + "'>" + i + "</option>";
+									}
+								frtObj.html(tempStr);
+								setTimeout(function(){frtObj.val(params[2].FrameRate);},0);
+							}
+						}
+						else{
+							if(frtObj.length==60)
+							{
+								return;
+							}
+							else{
+								for(i=60;i>0;i--){
+									var tempStr;
+									tempStr += "<option value='" + i + "'>" + i + "</option>";
+									}
+								frtObj.html(tempStr);
+								setTimeout(function(){frtObj.val(params[2].FrameRate);},0);
+							}
+						
+						}
+					}
+				}
+			}
+			resolutionInit();
+		}
+	}
+	
+	function selectRateName(){
+    var val = $("#BitRateControl").val();
+    $("#RateName").text(["码率","码率上限"][val]);
+	}
+	
+	/*返回当前码流类型和编码类型的组合在数组中的索引位置*/
+	function currentCodetype(){
+		var i=$("#Streamtype").val();
+		var codei=$("#CodingType").val();
+		//console.log("i:"+i+"codei:"+codei);
+		if(i=="0")
+		{
+			if(codei=="0")
+			{
+				return 0; //264主码流
+			}
+			else{
+				return 4; //265主码流
+			}
+		}
+		else if(i=="1")
+		{
+			if(codei=="0")
+			{
+				return 1; //264副码流
+			}
+			else{
+				return 5;//265副驸马
+			}
+		}
+		else if(i=="2")
+		{
+			if(codei=="0")
+			{
+				return 2;//254第三码流
+			}
+			else if(codei=="1"){
+				return 6;//265第三码流
+			}
+			else{
+				return 8;//MJPEG
+			}
+		}
+		else if(i=="3")
+		{
+			if(codei=="0")
+			{
+				return 3;//264第四码流
+			}
+			else{
+				return 7;//265第四码流
+			}
+		}
+	}
+	
+	/*码流数据数组初始化函数*/
+	function arrayInit(){
+		for(var i=0;i<4;i++)
+		{
+			params[i]={
+				Streamtype:$("#Streamtype_"+i).val(),
+				Switch:$("#Switch_"+i).val(),
+				CodingType:$("#Current_Codingtype_"+i).val(),
+				CodingQuality:$("#Coding_Quality_"+i).val(),
+				Resolution:$("#Resolution_"+i).val(),
+				IPrate:$("#IPrate_"+i).val(),
+				FrameRate:$("#FrameRate_"+i).val(),
+				BitRateControl:$("#BitRateControl_"+i).val(),
+				BitRateTop:$("#BitRateTop_"+i).val(),
+			}
+		}
+	}
+	
+	/*开关状态显示变化函数*/
+	function StatesInit(){
+		for(var i=0;i<4;i++)
+		{
+			if(params[i].Switch!=0){
+			 $("#switch"+i).removeClass("states-close").addClass("states-open");
+			}
+			else{
+		     $("#switch"+i).removeClass("states-open").addClass("states-close");
+			}
+		}
+	}
+	
+	/*分辨率初始化函数*/
+	function resolutionInit(){
+		var tempStr="";
+		var currentType;
+		var $Resolution=$("#Resolution");
+		var Streamtype=$("#Streamtype").val();
+		currentType=currentCodetype();
+		if(supMaxResolution==2)
+		{
+			if(Streamtype=="0")
+			{
+				tempStr += "<option value='10'>1920x1080</option>";
+				tempStr += "<option value='8'>1280x960</option>";
+				tempStr += "<option value='5'>1280x720</option>";
+			}
+			else if(Streamtype=="1")
+			{
+				tempStr += "<option value='10'>1920x1080</option>";
+				tempStr += "<option value='8'>1280x960</option>";
+				tempStr += "<option value='5'>1280x720</option>";
+				if(frequency==50){
+				tempStr += "<option value='4'>720x576</option>";
+				tempStr += "<option value='16'>704x576</option>";
+				tempStr += "<option value='6'>640x480</option>";
+				tempStr += "<option value='2'>352x288</option>";
+				tempStr += "<option value='21'>320x240</option>";
+				}
+				else{
+				tempStr += "<option value='4'>720x480</option>";
+				tempStr += "<option value='16'>704x480</option>";
+				tempStr += "<option value='6'>640x480</option>";
+				tempStr += "<option value='2'>352x240</option>";
+				tempStr += "<option value='21'>320x240</option>";
+				}
+				tempStr += "<option value='0'>"+(LANGUAGE==1?"关闭":"Closed")+"</option>";
+			}
+			else if(Streamtype=="2")
+			{
+				tempStr += "<option value='10'>1920x1080</option>";
+				tempStr += "<option value='8'>1280x960</option>";
+				tempStr += "<option value='5'>1280x720</option>";
+				tempStr += "<option value='0'>"+(LANGUAGE==1?"关闭":"Closed")+"</option>";
+			}
+			else{
+				if(frequency==50){
+				tempStr += "<option value='16'>704x576</option>";
+				}
+				else{
+				tempStr += "<option value='16'>704x480</option>";
+				}
+			}
+		}
+	    else if(supMaxResolution==5){ //liuzj
+			if(Streamtype=="0")
+			{
+				tempStr += "<option value='26'>3072x1728</option>";
+				tempStr += "<option value='20'>2592x1944</option>";
+				tempStr += "<option value='15'>2560x1920</option>";
+				tempStr += "<option value='12'>2048x1536</option>";
+				tempStr += "<option value='22'>2304x1296</option>";
+				tempStr += "<option value='10'>1920x1080</option>";
+				tempStr += "<option value='8'>1280x960</option>";
+				tempStr += "<option value='5'>1280x720</option>";
+			}
+			else if(Streamtype=="1")
+			{
+				tempStr += "<option value='10'>1920x1080</option>";
+				tempStr += "<option value='8'>1280x960</option>";
+				tempStr += "<option value='5'>1280x720</option>";
+				if(frequency==50){
+				tempStr += "<option value='4'>720x576</option>";
+				tempStr += "<option value='16'>704x576</option>";
+				tempStr += "<option value='6'>640x480</option>";
+				tempStr += "<option value='2'>352x288</option>";
+				tempStr += "<option value='21'>320x240</option>";
+				}
+				else{
+				tempStr += "<option value='4'>720x480</option>";
+				tempStr += "<option value='16'>704x480</option>";
+				tempStr += "<option value='6'>640x480</option>";
+				tempStr += "<option value='2'>352x240</option>";
+				tempStr += "<option value='21'>320x240</option>";
+				}
+			}
+			else if(Streamtype=="2")
+			{
+				if(currentType=="8")//mjpeg
+				{
+					tempStr += "<option value='26'>3072x1728</option>";
+					tempStr += "<option value='20'>2592x1944</option>";
+					tempStr += "<option value='15'>2560x1920</option>";
+					tempStr += "<option value='10'>1920x1080</option>";
+					tempStr += "<option value='8'>1280x960</option>";
+					tempStr += "<option value='5'>1280x720</option>";
+				}
+				else{
+					tempStr += "<option value='5'>1280x720</option>";
+					if(frequency==50){
+						tempStr += "<option value='4'>720x576</option>";
+					}
+					else{
+						tempStr += "<option value='4'>720x480</option>";
+					}
+				}
+			}
+			else{
+				if(frequency==50){
+					tempStr += "<option value='4'>720x576</option>";
+				}
+				else{
+						tempStr += "<option value='4'>720x480</option>";
+				}
+				//tempStr += "<option value='0'>"+(LANGUAGE==1?"关闭":"Closed")+"</option>";
+			}
+		}
+		else if(supMaxResolution==6||supMaxResolution==8){
+		if(Streamtype=="0")
+			{
+				if(supMaxResolution==8) //4K
+				{
+					tempStr += "<option value='29'>3840X2160</option>";
+				}
+				tempStr += "<option value='25'>3072x2048</option>";
+				tempStr += "<option value='26'>3072x1728</option>";
+				tempStr += "<option value='27'>2560x2048</option>";
+				tempStr += "<option value='20'>2592x1944</option>";
+				tempStr += "<option value='15'>2560x1920</option>";
+				tempStr += "<option value='12'>2048x1536</option>";
+				tempStr += "<option value='22'>2304x1296</option>";
+				tempStr += "<option value='10'>1920x1080</option>";
+				tempStr += "<option value='8'>1280x960</option>";
+				tempStr += "<option value='5'>1280x720</option>";
+			}
+		else if(Streamtype=="1")
+			{
+				tempStr += "<option value='10'>1920x1080</option>";
+				tempStr += "<option value='8'>1280x960</option>";
+				tempStr += "<option value='5'>1280x720</option>";
+				if(frequency==50){
+				tempStr += "<option value='4'>720x576</option>";
+				tempStr += "<option value='16'>704x576</option>";
+				tempStr += "<option value='6'>640x480</option>";
+				tempStr += "<option value='2'>352x288</option>";
+				tempStr += "<option value='21'>320x240</option>";
+				}
+				else{
+				tempStr += "<option value='4'>720x480</option>";
+				tempStr += "<option value='16'>704x480</option>";
+				tempStr += "<option value='6'>640x480</option>";
+				tempStr += "<option value='2'>352x240</option>";
+				tempStr += "<option value='21'>320x240</option>";
+				}
+			}
+		else if(Streamtype=="2")
+			{
+				if(currentType=="8")//mjpeg
+				{
+					if(supMaxResolution==8)//4K
+					{
+						tempStr += "<option value='29'>3840X2160</option>";
+					}
+					tempStr += "<option value='25'>3072x2048</option>";
+					tempStr += "<option value='20'>2592x1944</option>";
+					tempStr += "<option value='15'>2560x1920</option>";
+					tempStr += "<option value='10'>1920x1080</option>";					
+					tempStr += "<option value='8'>1280x960</option>";
+					tempStr += "<option value='5'>1280x720</option>";
+				}
+				else{
+					tempStr += "<option value='5'>1280x720</option>";
+					if(frequency==50){
+						tempStr += "<option value='4'>720x576</option>";
+					}
+					else{
+						tempStr += "<option value='4'>720x480</option>";
+					}
+					}
+			}
+			else{
+					if(frequency==50){
+						tempStr += "<option value='4'>720x576</option>";
+						tempStr += "<option value='2'>352x288</option>";
+					}
+					else{
+						tempStr += "<option value='4'>720x480</option>";
+						tempStr += "<option value='2'>352x240</option>";
+					}
+				}
+			}
+		$Resolution.html(tempStr);
+		$Resolution.val(params[Streamtype].Resolution);
+		if($Resolution.val()==null)
+		{
+			$Resolution.val(5);
+		}
+	}
+	
+	/*帧率初始化函数*/
+	function frameInit(){
+		var currentType;
+		var Streamtype=$("#Streamtype").val();
+		var tempStr="";
+		var $FrameRate=$("#FrameRate");
+		if(supMaxResolution==8)//4K项目最大帧率只有25/30帧*/
+		{
+			if(frequency==50){
+				for(i=25;i>0;i--){
+				tempStr += "<option value='" + i + "'>" + i + "</option>";
+				}
+			}
+			else{
+				for(i=30;i>0;i--){
+				tempStr += "<option value='" + i + "'>" + i + "</option>";
+				}
+			}
+			$FrameRate.html(tempStr);
+			$FrameRate.val(params[Streamtype].FrameRate);
+		}
+		else{
+			
+			var resolution_current=$("#Resolution").val();
+			var resolution_major=params[0].Resolution;
+			var mjpegresolution=params[2].Resolution;
+			var resolution=Streamtype==0?resolution_current:resolution_major;
+			if(mjpegresolution=="16")//为了方便后面逻辑梳理（小于1080P的分辨率值应该小于10），这里将分辨率底层对应值为16的改为3
+			{
+				mjpegresolution=3;
+			}
+			currentType=currentCodetype();
+			//console.log("帧率初始化保存数据数组中的索引："+currentType);
+			if(frequency==50)//liuzj
+			{
+				if(resolution<=10&&mjpegresolution<=10)
+				{
+					if(currentType==8)
+					{
+						var maxFrameRate=25;
+					}
+					else{
+						var maxFrameRate=50;
+					}
+				}
+				else{
+					var maxFrameRate=25;
+				} 
+			}
+			else{
+				if(resolution<=10&&mjpegresolution<=10)
+					{
+						if(currentType==8)
+						{
+							var maxFrameRate=30;
+						}
+						else{
+							var maxFrameRate=60;
+						}
+					}
+					else{
+						var maxFrameRate=30;
+					}
+				}
+			for(i=maxFrameRate;i>0;i--){
+				tempStr += "<option value='" + i + "'>" + i + "</option>";
+				}
+	
+				$FrameRate.html(tempStr);
+				$FrameRate.val(params[Streamtype].FrameRate);
+		}	
+  }
+	
+	/*数据保存函数*/
+	function videoSet(){
+		var currentType;
+		var i=$("#Streamtype").val();
+		params[i].CodingType=$("#CodingType").val();
+		params[i].Switch=$("#Switch").val();
+		currentType=currentCodetype();
+		params[i].Resolution=$("#Resolution").val();
+		params[i].FrameRate=$("#FrameRate").val();
+		if(currentType=="8")
+		{
+			$("#MJPEGQuality_").val($("#MJPEGQuality").val());
+		}
+		else{
+			params[i].CodingQuality=$("#CodingQuality").val();
+			params[i].IPrate=$("#IPrate").val();
+			params[i].BitRateControl=$("#BitRateControl").val();
+			params[i].BitRateTop=$("#BitRateTop").val();
+		}
+		StatesInit();
+	}
+	
+	
+	function Raterange(i){
+		if(i=="0")
+		{
+			$("#Raterange").html("(256~10000)");
+		}
+		else if(i=="1")
+		{
+			$("#Raterange").html("(128~4000)");
+		}
+		else if(i=="2")
+		{
+			$("#Raterange").html("(256~2000)");
+		}
+		else{
+			$("#Raterange").html("(128~1000)");
+		}
+
+	}
+	
+	function rateRangeCheck(id){
+		var inputObj = $("#"+id);
+		var streamtype=$("#Streamtype").val();
+		var val = parseInt(inputObj.val(),10);
+		
+		var max;
+		var min;
+		if(streamtype=="0"){
+			min=256;
+			max=10000
+		}
+		else if(streamtype=="1"){
+			min=128;
+			max=4000;
+		}
+		else if(streamtype=="2"){
+			min=256;
+			max=2000;
+		}
+		else{
+			min=128;
+			max=1000;
+		}
+		val = isNaN(val)? 0: val;
+		val = Math.max(val,min);
+		val = Math.min(val,max);
+		inputObj.val(val);
+	}
+	
+	/*元素绑定函数*/
+	function bindingFunction(){
+		$("#Streamtype").change(function(){
+			StreamtypeChange();
+		});
+		$("#CodingType").change(function(){
+			CodingtypeChange();
+		});
+		$("#Resolution").change(function(){
+			resolution_rel_framerate();
+		});
+		$("#BitRateControl").change(function(){
+			selectRateName();
+		});
+		$("#BitRateTop").blur(function(){
+			rateRangeCheck(this.id);
+		})
+	}
+	
+	/*程序入口*/
+	$(function(){
+		arrayInit();
+		$("#Streamtype").val(params[0].Streamtype);//设置页面默认初始化时的码流和编码类型
+		$("#CodingType").val(params[0].CodingType);
+		$("#CodingQuality").val(params[0].CodingQuality);
+		$("#Resolution").val(params[0].Resolution);
+		$("#IPrate").val(params[0].IPrate);
+		$("#FrameRate").val(params[0].FrameRate);
+		$("#BitRateControl").val(params[0].BitRateControl);
+		$("#BitRateTop").val(params[0].BitRateTop);
+		
+		if(supMaxResolution==8)
+		{
+			$("#Resolution").off("change");
+		}
+		bindingFunction(); 
+		codingQualityShow();
+		resolutionInit();
+		frameInit();
+		selectRateName();
+		StatesInit();
+	})
+ </script>
+ </body>
+ </html>
